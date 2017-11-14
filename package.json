@@ -46,7 +46,7 @@
     "heroku-postbuild": "npm run build"
   },
   "lint-staged": {
-    "app/*.js": "lint:eslint"
+    "*.js": "lint:eslint"
   },
   "pre-commit": "lint:staged",
   "babel": {
