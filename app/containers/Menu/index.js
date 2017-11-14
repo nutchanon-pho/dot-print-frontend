@@ -9,6 +9,7 @@ import { Menu, Image, Responsive, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import DotPrintLogo from 'images/dotprint-logo.png';
 import injectReducer from 'utils/injectReducer';
@@ -16,6 +17,7 @@ import reducer from './reducer';
 import messages from './messages';
 import { makeSelectActiveMenu } from './selectors';
 import { selectMenu } from './actions';
+
 
 const paddingForItems = { paddingRight: '75px' };
 
@@ -34,11 +36,15 @@ class DotPrintMenu extends Component {
           <Image src={DotPrintLogo} style={{ width: '150px', position: 'absolute', marginTop: '35px', marginLeft: '55px' }} />
         </Responsive>
         <Menu stackable style={{ paddingTop: '55px', paddingRight: '100px' }} text size="large" floated="right">
-          <Menu.Item style={paddingForItems} name="home" active={activeMenu === 'home'} onClick={this.handleItemClick}>
-            <b><FormattedMessage {...messages.menuHome} /></b>
+          <Menu.Item as="div" style={paddingForItems} name="home" active={activeMenu === 'home'} onClick={this.handleItemClick}>
+            <Link to="/">
+              <b><FormattedMessage {...messages.menuHome} /></b>
+            </Link>
           </Menu.Item>
-          <Menu.Item style={paddingForItems} name="shop" active={activeMenu === 'shop'} onClick={this.handleItemClick} >
-            <FormattedMessage {...messages.menuShop} />
+          <Menu.Item as="div" style={paddingForItems} name="shop" active={activeMenu === 'shop'} onClick={this.handleItemClick} >
+            <Link to="/shop">
+              <FormattedMessage {...messages.menuShop} />
+            </Link>
           </Menu.Item>
           <Menu.Item style={paddingForItems} name="gallery" active={activeMenu === 'gallery'} onClick={this.handleItemClick}>
             <FormattedMessage {...messages.menuGallery} />
