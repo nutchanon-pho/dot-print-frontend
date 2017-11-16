@@ -11,7 +11,8 @@ export default class GalleryPage extends React.PureComponent { // eslint-disable
   render() {
     return (
       <article>
-        <Helmet><title>Shop Page</title>
+        <Helmet>
+          <title>Shop Page</title>
           <meta name="description" content="" />
         </Helmet>
         <Menu />
