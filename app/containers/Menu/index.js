@@ -13,6 +13,10 @@ import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import DotPrintLogo from 'images/dotprint-logo.png';
 import injectReducer from 'utils/injectReducer';
+import Modal from 'components/Modal';
+import LoginForm from 'containers/LoginForm';
+import RegisterForm from 'containers/RegisterForm';
+
 import reducer from './reducer';
 import messages from './messages';
 import { makeSelectActiveMenu } from './selectors';
@@ -20,6 +24,22 @@ import { selectMenu } from './actions';
 
 
 const paddingForItems = { paddingRight: '75px' };
+
+const Login = () => (
+  <Modal
+    trigger={<Menu.Item><FormattedMessage {...messages.menuLogin} /></Menu.Item>}
+    header="LOGIN"
+    description={<LoginForm />}
+  />
+);
+
+const Register = () => (
+  <Modal
+    trigger={<Menu.Item><FormattedMessage {...messages.menuRegister} /></Menu.Item>}
+    header="REGISTER"
+    description={<RegisterForm />}
+  />
+);
 
 class DotPrintMenu extends Component {
 
@@ -57,13 +77,9 @@ class DotPrintMenu extends Component {
           <Menu.Item style={paddingForItems} name="ourStory" active={activeMenu === 'ourStory'} onClick={this.handleItemClick}>
             <FormattedMessage {...messages.menuOurStory} />
           </Menu.Item>
-          <Menu.Item active={activeMenu === 'login'} onClick={this.handleItemClick}>
-            <FormattedMessage {...messages.menuLogin} />
-          </Menu.Item>
+          <Login />
           <Responsive {...Responsive.onlyComputer}><Menu.Item content="|" /></Responsive>
-          <Menu.Item name="register" active={activeMenu === 'register'} onClick={this.handleItemClick}>
-            <FormattedMessage {...messages.menuRegister} />
-          </Menu.Item>
+          <Register />
           <Menu.Item name="cart">
             <Icon name="cart" size="large" />
           </Menu.Item>
