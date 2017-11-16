@@ -21,7 +21,7 @@ export default class LoginForm extends Component { // eslint-disable-line react/
               </Form.Field>
               <Form.Field style={{ textAlign: 'right' }}>
                 Forgot Your Password?
-            </Form.Field>
+              </Form.Field>
               <Form.Field style={{ textAlign: 'right' }}>
                 <Button type="submit">GO</Button>
               </Form.Field>
