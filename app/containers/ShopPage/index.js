@@ -16,7 +16,7 @@ export default class ShopPage extends React.PureComponent { // eslint-disable-li
           <meta name="description" content="" />
         </Helmet>
         <Menu />
-        <Container style={{ marginTop: '200px', height: '300px' }}>
+        <Container style={{ marginTop: '150px', minHeight: '350px' }}>
           <Grid stackable divided columns={2}>
             <Grid.Column textAlign="center">
               <div><Icon name="add circle" size="massive" /></div>
