@@ -46,8 +46,10 @@ class DotPrintMenu extends Component {
               <FormattedMessage {...messages.menuShop} />
             </Link>
           </Menu.Item>
-          <Menu.Item style={paddingForItems} name="gallery" active={activeMenu === 'gallery'} onClick={this.handleItemClick}>
-            <FormattedMessage {...messages.menuGallery} />
+          <Menu.Item as="div" style={paddingForItems} name="gallery" active={activeMenu === 'gallery'} onClick={this.handleItemClick}>
+            <Link to="/gallery">
+              <FormattedMessage {...messages.menuGallery} />
+            </Link>
           </Menu.Item>
           <Menu.Item style={paddingForItems} name="inspiration" active={activeMenu === 'inspiration'} onClick={this.handleItemClick}>
             <FormattedMessage {...messages.menuInspiration} />
