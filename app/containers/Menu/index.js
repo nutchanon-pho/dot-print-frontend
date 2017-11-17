@@ -16,6 +16,7 @@ import injectReducer from 'utils/injectReducer';
 import Modal from 'components/Modal';
 import LoginForm from 'containers/LoginForm';
 import RegisterForm from 'containers/RegisterForm';
+import { makeSelectCurrentUser } from 'containers/App/selectors';
 
 import reducer from './reducer';
 import messages from './messages';
@@ -46,7 +47,7 @@ class DotPrintMenu extends Component {
   handleItemClick = (e, { name }) => this.props.selectMenu(name)
 
   render() {
-    const { activeMenu } = this.props;
+    const { activeMenu, currentUser } = this.props;
     return (
       <div>
         <Responsive {...Responsive.onlyMobile}>
@@ -77,9 +78,14 @@ class DotPrintMenu extends Component {
           <Menu.Item style={paddingForItems} name="ourStory" active={activeMenu === 'ourStory'} onClick={this.handleItemClick}>
             <FormattedMessage {...messages.menuOurStory} />
           </Menu.Item>
-          <Login />
-          <Responsive {...Responsive.onlyComputer}><Menu.Item content="|" /></Responsive>
-          <Register />
+          {!currentUser && <Login />}
+          {!currentUser && <Responsive {...Responsive.onlyComputer}><Menu.Item content="|" /></Responsive>}
+          {!currentUser && <Register />}
+          {currentUser && <Menu.Item as="div" style={paddingForItems}>
+            <Link to="/profile">
+              <strong>{currentUser.get('firstName')}</strong>
+            </Link>
+          </Menu.Item>}
           <Menu.Item name="cart">
             <Icon name="cart" size="large" />
           </Menu.Item>
@@ -93,10 +99,12 @@ class DotPrintMenu extends Component {
 DotPrintMenu.propTypes = {
   activeMenu: PropTypes.string,
   selectMenu: PropTypes.func,
+  currentUser: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   activeMenu: makeSelectActiveMenu(),
+  currentUser: makeSelectCurrentUser(),
 });
 
 const withReducer = injectReducer({ key: 'menu', reducer });

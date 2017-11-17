@@ -15,6 +15,7 @@ import HomePage from 'containers/HomePage/Loadable';
 import ShopPage from 'containers/ShopPage/Loadable';
 import AdminPage from 'containers/AdminPage/Loadable';
 import GalleryPage from 'containers/GalleryPage/Loadable';
+import ProfilePage from 'containers/ProfilePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 const AppWrapper = styled.div``;
@@ -32,6 +33,7 @@ export default function App() {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/shop" component={ShopPage} />
         <Route exact path="/gallery" component={GalleryPage} />
+        <Route exact path="/profile" component={ProfilePage} />
         <Route path="/admin" component={AdminPage} />
         <Route path="" component={NotFoundPage} />
       </Switch>
