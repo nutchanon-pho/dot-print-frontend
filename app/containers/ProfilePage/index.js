@@ -15,6 +15,10 @@ import Footer from 'components/Footer';
 import { Grid, Image, Segment, Menu, Header } from 'semantic-ui-react';
 import { makeSelectCurrentUser } from 'containers/App/selectors';
 
+import AccountDetails from 'containers/AccountDetails';
+import BillingDetails from 'containers/BillingDetails';
+import PurchaseHistory from 'containers/PurchaseHistory';
+
 export class ProfilePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   state = { activeItem: 'accountDetails' }
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -49,7 +53,9 @@ export class ProfilePage extends React.Component { // eslint-disable-line react/
               </Menu>
             </Grid.Column>
             <Grid.Column computer={13} mobile={8}>
-
+              {activeItem === 'accountDetails' && <AccountDetails />}
+              {activeItem === 'purchaseHistory' && <PurchaseHistory />}
+              {activeItem === 'billingDetails' && <BillingDetails />}
             </Grid.Column>
           </Grid>
         </Segment>

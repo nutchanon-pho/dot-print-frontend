@@ -1,6 +1,6 @@
 /**
  *
- * AccountDetails
+ * BillingDetails
  *
  */
 
@@ -10,25 +10,22 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Form, Button } from 'semantic-ui-react';
 
-export class AccountDetails extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class BillingDetails extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <div>
         <Form>
           <Form.Field>
-            <Form.Input label="FIRSTNAME" type="text" />
+            <Form.Input label="ADDRESS 1" type="text" />
           </Form.Field>
           <Form.Field>
-            <Form.Input label="LASTNAME" type="text" />
+            <Form.Input label="ADDRESS 2" type="text" />
           </Form.Field>
           <Form.Field>
-            <Form.Input label="NEW PASSWORD" type="password" />
+            <Form.Input label="CITY" type="text" />
           </Form.Field>
           <Form.Field>
-            <Form.Input label="CONFIRM NEW PASSWORD" type="password" />
-          </Form.Field>
-          <Form.Field>
-            <Form.Input label="MOBILE PHONE" type="text" />
+            <Form.Input label="POSTAL CODE" type="text" />
           </Form.Field>
           <Form.Field style={{ textAlign: 'right' }}>
             <Button type="submit">SAVE</Button>
@@ -39,7 +36,7 @@ export class AccountDetails extends React.Component { // eslint-disable-line rea
   }
 }
 
-AccountDetails.propTypes = {
+BillingDetails.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
@@ -54,4 +51,4 @@ const withConnect = connect(null, mapDispatchToProps);
 
 export default compose(
   withConnect,
-)(AccountDetails);
+)(BillingDetails);
