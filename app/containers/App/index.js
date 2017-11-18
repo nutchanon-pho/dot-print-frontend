@@ -33,7 +33,7 @@ export default function App() {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/shop" component={ShopPage} />
         <Route exact path="/gallery" component={GalleryPage} />
-        <Route exact path="/profile" component={ProfilePage} />
+        <Route path="/profile" component={ProfilePage} />
         <Route path="/admin" component={AdminPage} />
         <Route path="" component={NotFoundPage} />
       </Switch>

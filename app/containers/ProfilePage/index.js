@@ -14,6 +14,8 @@ import DotPrintMenu from 'containers/Menu';
 import Footer from 'components/Footer';
 import { Grid, Image, Segment, Menu, Header } from 'semantic-ui-react';
 import { makeSelectCurrentUser } from 'containers/App/selectors';
+import { Link } from 'react-router-dom';
+import { Route } from 'react-router';
 
 import AccountDetails from 'containers/AccountDetails';
 import BillingDetails from 'containers/BillingDetails';
@@ -21,7 +23,9 @@ import PurchaseHistory from 'containers/PurchaseHistory';
 
 export class ProfilePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   state = { activeItem: 'accountDetails' }
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeItem: name });
+  }
   render() {
     const { activeItem } = this.state || {};
     const { currentUser } = this.props;
@@ -41,21 +45,28 @@ export class ProfilePage extends React.Component { // eslint-disable-line react/
               </Header>
               <Image src={'https://api.adorable.io/avatars/285/abott@adorable.png'} size="medium" className="circular" />
               <Menu vertical fluid>
-                <Menu.Item name="accountDetails" active={activeItem === 'accountDetails'} onClick={this.handleItemClick}>
-                  ACCOUNT DETAILS
+                <Link to="/profile/accountDetails">
+                  <Menu.Item as="div" name="accountDetails" active={activeItem === 'accountDetails'} onClick={this.handleItemClick}>
+                    ACCOUNT DETAILS
                 </Menu.Item>
-                <Menu.Item name="purchaseHistory" active={activeItem === 'purchaseHistory'} onClick={this.handleItemClick}>
-                  PURCHASE HISTORY
+                </Link>
+                <Link to="/profile/purchaseHistory">
+                  <Menu.Item as="div" name="purchaseHistory" active={activeItem === 'purchaseHistory'} onClick={this.handleItemClick}>
+                    PURCHASE HISTORY
                 </Menu.Item>
-                <Menu.Item name="billingDetails" active={activeItem === 'billingDetails'} onClick={this.handleItemClick}>
-                  BILLING DETAILS
+                </Link>
+                <Link to="/profile/billingDetails">
+                  <Menu.Item as="div" name="billingDetails" active={activeItem === 'billingDetails'} onClick={this.handleItemClick}>
+                    BILLING DETAILS
                 </Menu.Item>
+                </Link>
               </Menu>
             </Grid.Column>
             <Grid.Column computer={13} mobile={8}>
-              {activeItem === 'accountDetails' && <AccountDetails />}
-              {activeItem === 'purchaseHistory' && <PurchaseHistory />}
-              {activeItem === 'billingDetails' && <BillingDetails />}
+              <Route exact path="/profile" component={AccountDetails} />
+              <Route path="/profile/accountDetails" component={AccountDetails} />
+              <Route path="/profile/purchaseHistory" component={PurchaseHistory} />
+              <Route path="/profile/billingDetails" component={BillingDetails} />
             </Grid.Column>
           </Grid>
         </Segment>

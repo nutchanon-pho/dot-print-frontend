@@ -8,29 +8,42 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { Card, Menu, Segment, Image } from 'semantic-ui-react';
+import { Menu, Segment, Button } from 'semantic-ui-react';
+import ReactTable from 'react-table';
+import 'react-table/react-table.css';
 
 const items = [
   {
-    key: 1,
-    header: 'ORDER NUMBER: 5743840',
-    description: 'Canvas A3 Size. 20 Copies.',
-    meta: '17th November 2017 13:04',
-    previewImage: ['https://picsum.photos/600/400?image=6'],
+    orderNumber: '5743840',
+    orderDate: '11/11/2017',
+    netTotal: 560.50,
+    status: 'Delivered',
   },
   {
-    key: 2,
-    header: 'ORDER NUMBER: 5759840',
-    description: 'Canvas A3 Size. 20 Copies.',
-    meta: '17th November 2017 13:04',
-    previewImage: ['https://picsum.photos/600/400?image=7'],
-  },
-  {
-    key: 3,
-    header: 'ORDER NUMBER: 2743840',
-    description: 'Canvas A3 Size. 20 Copies.',
-    meta: '17th November 2017 13:04',
-    previewImage: ['https://picsum.photos/600/400?image=8', 'https://picsum.photos/600/400?image=9'],
+    orderNumber: '5743840',
+    orderDate: '11/11/2017',
+    netTotal: 560.50,
+    status: 'Delivered',
+  }, {
+    orderNumber: '5743840',
+    orderDate: '11/11/2017',
+    netTotal: 560.50,
+    status: 'Delivered',
+  }, {
+    orderNumber: '5743840',
+    orderDate: '11/11/2017',
+    netTotal: 560.50,
+    status: 'Delivered',
+  }, {
+    orderNumber: '5743840',
+    orderDate: '11/11/2017',
+    netTotal: 560.50,
+    status: 'Delivered',
+  }, {
+    orderNumber: '5743840',
+    orderDate: '11/11/2017',
+    netTotal: 560.50,
+    status: 'Delivered',
   },
 ];
 
@@ -44,27 +57,36 @@ export class PurchaseHistory extends React.Component { // eslint-disable-line re
 
     return (
       <div>
-        <Card.Group itemsPerRow={1}>
-          {items.map((item) => (
-            <Card key={item.header}>
-              <Card.Content>
-                <Card.Header>
-                  {item.header}
-                </Card.Header>
-                <Card.Meta>
-                  {item.meta}
-                </Card.Meta>
-                <Card.Description>
-                  {item.description}
-                </Card.Description>
-                {item.previewImage.map((imageSrc) => (
-                  <Image floated="right" size="small" key={imageSrc} src={imageSrc} />
-                ))}
-              </Card.Content>
-            </Card>
-          ))}
-        </Card.Group>
-        <br />
+        <ReactTable
+          data={items}
+          width="100%"
+          columns={[
+            {
+              Header: 'Order Number',
+              accessor: 'orderNumber',
+            },
+            {
+              Header: 'Order Date',
+              accessor: 'orderDate',
+            },
+            {
+              Header: 'Net Total',
+              accessor: 'netTotal',
+            },
+            {
+              Header: 'Status',
+              accessor: 'status',
+            },
+            {
+              Header: '',
+              Cell: () => (
+                <Button primary>View</Button>
+              ),
+            },
+          ]}
+          defaultPageSize={25}
+          className="-striped -highlight"
+        />
         <Segment basic textAlign="center">
           <Menu pagination>
             <Menu.Item name="1" active={activeItem === '1'} onClick={this.handleItemClick} />
