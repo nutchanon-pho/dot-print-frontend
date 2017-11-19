@@ -11,6 +11,7 @@ import { compose } from 'redux';
 import { Menu, Segment, Button } from 'semantic-ui-react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
+import { Link } from 'react-router-dom';
 
 const items = [
   {
@@ -79,8 +80,9 @@ export class PurchaseHistory extends React.Component { // eslint-disable-line re
             },
             {
               Header: '',
-              Cell: () => (
-                <Button primary>View</Button>
+              Cell: (row) =>
+              (
+                <Link to={`purchaseHistory/${row.original.orderNumber}`}><Button primary>View</Button></Link>
               ),
             },
           ]}

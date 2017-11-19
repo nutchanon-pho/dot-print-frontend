@@ -14,8 +14,8 @@ import DotPrintMenu from 'containers/Menu';
 import Footer from 'components/Footer';
 import { Grid, Image, Segment, Menu, Header } from 'semantic-ui-react';
 import { makeSelectCurrentUser } from 'containers/App/selectors';
-import { Link } from 'react-router-dom';
-import { Route } from 'react-router';
+import { Link, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router';
 
 import AccountDetails from 'containers/AccountDetails';
 import BillingDetails from 'containers/BillingDetails';
@@ -63,10 +63,13 @@ export class ProfilePage extends React.Component { // eslint-disable-line react/
               </Menu>
             </Grid.Column>
             <Grid.Column computer={13} mobile={8}>
-              <Route exact path="/profile" component={AccountDetails} />
-              <Route path="/profile/accountDetails" component={AccountDetails} />
-              <Route path="/profile/purchaseHistory" component={PurchaseHistory} />
-              <Route path="/profile/billingDetails" component={BillingDetails} />
+              <Switch>
+                <Route exact path="/profile" render={() => (<Redirect to="/profile/accountDetails" />)} />
+                <Route path="/profile/accountDetails" component={AccountDetails} />
+                <Route path="/profile/purchaseHistory/:id" render={({ match }) => (<p>{match.params.id}</p>)} />
+                <Route path="/profile/purchaseHistory" component={PurchaseHistory} />
+                <Route path="/profile/billingDetails" component={BillingDetails} />
+              </Switch>
             </Grid.Column>
           </Grid>
         </Segment>
