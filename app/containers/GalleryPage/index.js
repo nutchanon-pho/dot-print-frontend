@@ -1,8 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import DotPrintMenu from 'containers/Menu';
-import { Card, Menu, Grid, Segment } from 'semantic-ui-react';
+import { Menu, Grid, Segment } from 'semantic-ui-react';
 import Footer from 'components/Footer';
+import GalleryDimmer from 'components/GalleryDimmer';
 // import { FormattedMessage } from 'react-intl';
 // import messages from './messages';
 
@@ -68,9 +69,11 @@ export default class GalleryPage extends React.PureComponent { // eslint-disable
               </Menu>
             </Grid.Column>
             <Grid.Column computer={13} mobile={8}>
-              <Card.Group itemsPerRow={3} stackable>
-                {cardList.map((each) => <Card key={each.header} {...each} />)}
-              </Card.Group>
+              <Grid stackable columns={3}>
+                {cardList.map((each) => (
+                  <Grid.Column textAlign="center" ><GalleryDimmer src={each.image} /></Grid.Column>
+                ))}
+              </Grid>
             </Grid.Column>
           </Grid>
         </Segment>
