@@ -12,7 +12,7 @@ import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import DotPrintMenu from 'containers/Menu';
 import Footer from 'components/Footer';
-import { Grid, Image, Segment, Menu, Header } from 'semantic-ui-react';
+import { Grid, Image, Segment, Menu, Header, Button } from 'semantic-ui-react';
 import { makeSelectCurrentUser } from 'containers/App/selectors';
 import { Link, Redirect } from 'react-router-dom';
 import { Route, Switch } from 'react-router';
@@ -22,6 +22,8 @@ import BillingDetails from 'containers/BillingDetails';
 import PurchaseHistory from 'containers/PurchaseHistory';
 import PurchaseHistoryDetail from 'containers/PurchaseHistoryDetail/Loadable';
 
+import { logout } from 'containers/App/actions';
+
 export class ProfilePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   state = { activeItem: 'accountDetails' }
   handleItemClick = (e, { name }) => {
@@ -30,6 +32,9 @@ export class ProfilePage extends React.Component { // eslint-disable-line react/
   render() {
     const { activeItem } = this.state || {};
     const { currentUser } = this.props;
+    if (!currentUser) {
+      return (<Redirect to="/" />);
+    }
     return (
       <article>
         <Helmet>
@@ -45,6 +50,7 @@ export class ProfilePage extends React.Component { // eslint-disable-line react/
                 {`${currentUser.get('lastName')}`}
               </Header>
               <Image src={'https://api.adorable.io/avatars/285/abott@adorable.png'} size="medium" className="circular" />
+              <Segment basic textAlign="center"><Button color="red" onClick={() => this.props.logout()}>Logout</Button></Segment>
               <Menu vertical fluid>
                 <Link to="/profile/accountDetails">
                   <Menu.Item as="div" name="accountDetails" active={activeItem === 'accountDetails'} onClick={this.handleItemClick}>
@@ -82,20 +88,14 @@ export class ProfilePage extends React.Component { // eslint-disable-line react/
 
 ProfilePage.propTypes = {
   currentUser: PropTypes.object,
+  logout: PropTypes.func,
 };
-
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
 
 const mapStateToProps = createStructuredSelector({
   currentUser: makeSelectCurrentUser(),
 });
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withConnect = connect(mapStateToProps, { logout });
 
 export default compose(
   withConnect,

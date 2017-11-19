@@ -4,9 +4,14 @@
  * This is the first thing users see of our App, at the '/' route
  */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { Icon, Button, Grid, Form, Header } from 'semantic-ui-react';
 
-export default class LoginForm extends Component { // eslint-disable-line react/prefer-stateless-function
+import { login } from 'containers/App/actions';
+
+class LoginForm extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <Grid columns={2}>
@@ -23,7 +28,7 @@ export default class LoginForm extends Component { // eslint-disable-line react/
                 Forgot Your Password?
               </Form.Field>
               <Form.Field style={{ textAlign: 'right' }}>
-                <Button type="submit">GO</Button>
+                <Button onClick={() => this.props.login()}>GO</Button>
               </Form.Field>
             </Form>
           </Grid.Column>
@@ -55,3 +60,13 @@ export default class LoginForm extends Component { // eslint-disable-line react/
     );
   }
 }
+
+LoginForm.propTypes = {
+  login: PropTypes.func.isRequired,
+};
+
+const withConnect = connect(null, { login });
+
+export default compose(
+  withConnect
+)(LoginForm);

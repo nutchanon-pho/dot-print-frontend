@@ -14,6 +14,7 @@ import { fromJS } from 'immutable';
 
 import {
   LOGIN_SUCCESS,
+  LOGOUT_SUCCESS,
 } from './constants';
 
 // The initial state of the App
@@ -29,6 +30,9 @@ function appReducer(state = initialState, action) {
     case LOGIN_SUCCESS:
       return state
         .set('currentUser', action.user);
+    case LOGOUT_SUCCESS:
+      return state
+          .set('currentUser', null);
     default:
       return state;
   }

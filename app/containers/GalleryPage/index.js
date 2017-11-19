@@ -1,8 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import DotPrintMenu from 'containers/Menu';
-import { Card, Menu, Grid, Segment } from 'semantic-ui-react';
+import { Menu, Grid, Segment, Header } from 'semantic-ui-react';
 import Footer from 'components/Footer';
+import GalleryDimmer from 'components/GalleryDimmer';
 // import { FormattedMessage } from 'react-intl';
 // import messages from './messages';
 
@@ -32,6 +33,8 @@ const cardList = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   },
 ];
+
+const lorem = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
 
 export default class GalleryPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   handleItemClick = (name) => this.setState({ activeItem: name })
@@ -68,9 +71,14 @@ export default class GalleryPage extends React.PureComponent { // eslint-disable
               </Menu>
             </Grid.Column>
             <Grid.Column computer={13} mobile={8}>
-              <Card.Group itemsPerRow={3} stackable>
-                {cardList.map((each) => <Card key={each.header} {...each} />)}
-              </Card.Group>
+              <Header as="h1">DOTPRINT X ARTIST</Header>
+              <p>NEW ARTIST</p>
+              <p>{lorem}</p>
+              <Grid stackable columns={3}>
+                {cardList.map((each) => (
+                  <Grid.Column textAlign="center" ><GalleryDimmer src={each.image} /></Grid.Column>
+                ))}
+              </Grid>
             </Grid.Column>
           </Grid>
         </Segment>
