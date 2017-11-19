@@ -33,7 +33,7 @@ class GalleryDimmer extends React.Component { // eslint-disable-line react/prefe
         dimmer={{ active, content }}
         onMouseEnter={this.handleShow}
         onMouseLeave={this.handleHide}
-        size="medium"
+        fluid
         src={this.props.src}
       />
     );
